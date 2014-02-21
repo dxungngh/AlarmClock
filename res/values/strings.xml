@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Daniel Nguyen -->
+    <string name="email">dxungngh@gmail.com</string>
+    <string name="website">market://search?q=pub:Nguyen%20Hoang%20Dung</string>
+    <string name="send_email">Send email</string>
     <!-- Math Alarm Activity -->
     <string name="app_name">Alarm Clock</string>
     <string name="title_activity_set_alarms">Set Alarm</string>

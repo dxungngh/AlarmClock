@@ -2,7 +2,6 @@ package com.dungnh8.alarmclock.preferences;
 
 import java.util.Calendar;
 
-import com.dungnh8.alarmclock.R;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
@@ -14,13 +13,13 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +37,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.dungnh8.alarmclock.Alarm;
+import com.dungnh8.alarmclock.R;
 import com.dungnh8.alarmclock.database.Database;
 import com.dungnh8.alarmclock.preferences.AlarmPreference.Key;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
@@ -49,6 +49,7 @@ public class AlarmPreferencesActivity extends ListActivity {
 	TextView cancelButton;
 	private Alarm alarm;
 	private MediaPlayer mediaPlayer;
+	private static final String TAG = "AlarmPreferencesActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -469,41 +470,21 @@ public class AlarmPreferencesActivity extends ListActivity {
 			}
 			break;
 		case R.id.menu_item_website:
-			String url = "http://www.neilson.co.za";
-			Intent i = new Intent(Intent.ACTION_VIEW);
-			i.setData(Uri.parse(url));
-			startActivity(i);
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse(getString(R.string.website))));
 			break;
 		case R.id.menu_item_report:
-			Intent send = new Intent(Intent.ACTION_SENDTO);
-			String uriText;
-
-			String emailAddress = "bugs@neilson.co.za";
-			String subject = R.string.app_name + " Bug Report";
-			String body = "Debug:";
-			body += "\n OS Version: " + System.getProperty("os.version") + "("
-					+ android.os.Build.VERSION.INCREMENTAL + ")";
-			body += "\n OS API Level: " + android.os.Build.VERSION.SDK_INT;
-			body += "\n Device: " + android.os.Build.DEVICE;
-			body += "\n Model (and Product): " + android.os.Build.MODEL + " ("
-					+ android.os.Build.PRODUCT + ")";
-			body += "\n Screen Width: "
-					+ getWindow().getWindowManager().getDefaultDisplay()
-							.getWidth();
-			body += "\n Screen Height: "
-					+ getWindow().getWindowManager().getDefaultDisplay()
-							.getHeight();
-			body += "\n Hardware Keyboard Present: "
-					+ (getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS);
-
-			uriText = "mailto:" + emailAddress + "?subject=" + subject
-					+ "&body=" + body;
-
-			uriText = uriText.replace(" ", "%20");
-			Uri emalUri = Uri.parse(uriText);
-
-			send.setData(emalUri);
-			startActivity(Intent.createChooser(send, "Send mail..."));
+			try {
+				String to = getString(R.string.email);
+				Intent email = new Intent(Intent.ACTION_SEND);
+				email.putExtra(Intent.EXTRA_EMAIL, new String[] { to });
+				// need this to prompts email client only
+				email.setType("message/rfc822");
+				startActivity(Intent.createChooser(email,
+						getString(R.string.send_email)));
+			} catch (Exception e) {
+				Log.e(TAG, "emailListener", e);
+			}
 			break;
 		}
 		return super.onOptionsItemSelected(item);
