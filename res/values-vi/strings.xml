@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Math Alarm Activity -->
+    <string name="app_name">Đồng Hồ Báo Thức</string>
+    <string name="title_activity_set_alarms">Đặt báo thức</string>
+    <string name="no_alarms">Không có báo thức nào được đặt</string>
+    <string name="button_new">Tạo mới</string>
+
+    <!-- Menu -->
+    <string name="menu_item_rate">Đánh giá phần mềm</string>
+    <string name="menu_item_website">Website</string>
+    <string name="menu_item_report">Liên hệ tác giả</string>
+
+    <!-- Alert -->
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="decimal_button_text">,</string>
+    <string name="clear_button_text">Xóa tất cả</string>
+    <string name="minus_button_text">-</string>
+    <string name="button_delete">Xóa</string>
+    <string name="ok">Đồng ý</string>
+    <string name="cancel">Hủy</string>
+
+</resources>
