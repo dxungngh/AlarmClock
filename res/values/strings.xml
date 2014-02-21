@@ -33,5 +33,7 @@
     <string name="button_delete">Delete</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="delete_this_alarm">Delete this alarm ?</string>
 
 </resources>

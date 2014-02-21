@@ -89,6 +89,8 @@ public final class R {
         public static final int cancel=0x7f050019;
         public static final int clear_button_text=0x7f050015;
         public static final int decimal_button_text=0x7f050014;
+        public static final int delete=0x7f05001a;
+        public static final int delete_this_alarm=0x7f05001b;
         /**  Daniel Nguyen 
          */
         public static final int email=0x7f050000;

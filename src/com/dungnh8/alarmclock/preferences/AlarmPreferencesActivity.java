@@ -44,9 +44,9 @@ import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
 
 public class AlarmPreferencesActivity extends ListActivity {
 
-	ImageButton deleteButton;
-	TextView okButton;
-	TextView cancelButton;
+	private ImageButton deleteButton;
+	private TextView okButton;
+	private TextView cancelButton;
 	private Alarm alarm;
 	private MediaPlayer mediaPlayer;
 	private static final String TAG = "AlarmPreferencesActivity";

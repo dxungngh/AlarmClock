@@ -32,18 +32,31 @@ import android.widget.Toast;
 
 public class AlarmActivity extends ListActivity implements
 		android.view.View.OnClickListener {
-
-	ImageButton newButton;
-	ListView mathAlarmListView;
-	AlarmListAdapter alarmListAdapter;
+	private ImageButton newButton;
+	private ListView mathAlarmListView;
+	private AlarmListAdapter alarmListAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.alarm_activity);
+		setComponentView();
+		setListener();
+		callMathAlarmScheduleService();
+	}
 
+	private void setComponentView() {
 		newButton = (ImageButton) findViewById(com.dungnh8.alarmclock.R.id.button_new);
+		mathAlarmListView = (ListView) findViewById(android.R.id.list);
+	}
+
+	private void setListener() {
+		setNewButtonListener();
+		setMathAlarmListener();
+	}
+
+	private void setNewButtonListener() {
 		newButton.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -67,9 +80,9 @@ public class AlarmActivity extends ListActivity implements
 				return true;
 			}
 		});
+	}
 
-		mathAlarmListView = (ListView) findViewById(android.R.id.list);
-
+	private void setMathAlarmListener() {
 		mathAlarmListView.setLongClickable(true);
 		mathAlarmListView
 				.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -82,25 +95,27 @@ public class AlarmActivity extends ListActivity implements
 								.getItem(position);
 						Builder dialog = new AlertDialog.Builder(
 								AlarmActivity.this);
-						dialog.setTitle("Delete");
-						dialog.setMessage("Delete this alarm?");
-						dialog.setPositiveButton("Ok", new OnClickListener() {
+						dialog.setTitle(AlarmActivity.this
+								.getString(R.string.delete));
+						dialog.setMessage(AlarmActivity.this
+								.getString(R.string.delete_this_alarm));
+						dialog.setPositiveButton(
+								AlarmActivity.this.getString(R.string.ok),
+								new OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-
-								alarmListAdapter.getMathAlarms().remove(alarm);
-								alarmListAdapter.notifyDataSetChanged();
-
-								Database.init(AlarmActivity.this);
-								Database.deleteEntry(alarm);
-
-								AlarmActivity.this
-										.callMathAlarmScheduleService();
-							}
-						});
-						dialog.setNegativeButton("Cancel",
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										alarmListAdapter.getMathAlarms()
+												.remove(alarm);
+										alarmListAdapter.notifyDataSetChanged();
+										Database.init(AlarmActivity.this);
+										Database.deleteEntry(alarm);
+										AlarmActivity.this
+												.callMathAlarmScheduleService();
+									}
+								});
+						dialog.setNegativeButton(getString(R.string.cancel),
 								new OnClickListener() {
 
 									@Override
@@ -109,14 +124,10 @@ public class AlarmActivity extends ListActivity implements
 										dialog.dismiss();
 									}
 								});
-
 						dialog.show();
-
 						return true;
 					}
 				});
-
-		callMathAlarmScheduleService();
 	}
 
 	private void callMathAlarmScheduleService() {
@@ -143,9 +154,7 @@ public class AlarmActivity extends ListActivity implements
 		} else {
 			alarmListAdapter = (AlarmListAdapter) data;
 		}
-
 		this.setListAdapter(alarmListAdapter);
-
 	}
 
 	@Override
