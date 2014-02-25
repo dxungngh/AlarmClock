@@ -34,8 +34,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.dungnh8.alarmclock.Alarm;
 import com.dungnh8.alarmclock.R;
+import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.Database;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
@@ -45,7 +45,7 @@ import com.dungnh8.alarmclock.util.Constants;
 
 public class AlarmPreferencesActivity extends ListActivity {
 
-	private ImageButton deleteButton;
+	private ImageButton deleteButton, newButton;
 	private TextView okButton;
 	private TextView cancelButton;
 	private Alarm alarm;
@@ -210,10 +210,12 @@ public class AlarmPreferencesActivity extends ListActivity {
 	 * @author dungnh8
 	 */
 	private void setComponentView() {
-		deleteButton = (ImageButton) findViewById(R.id.toolbar).findViewById(
-				R.id.button_delete);
+		newButton = (ImageButton) findViewById(R.id.button_new);
+		deleteButton = (ImageButton) findViewById(R.id.button_delete);
 		okButton = (TextView) findViewById(R.id.textView_OK);
 		cancelButton = (TextView) findViewById(R.id.textView_cancel);
+		// hide new button
+		newButton.setVisibility(View.GONE);
 	}
 
 	private void callMathAlarmScheduleService() {

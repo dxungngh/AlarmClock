@@ -1,8 +1,9 @@
 package com.dungnh8.alarmclock.alert;
 
-import com.dungnh8.alarmclock.Alarm;
 
 import com.dungnh8.alarmclock.R;
+import com.dungnh8.alarmclock.database.Alarm;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

@@ -8,5 +8,22 @@
     <!-- alarm activity -->
     <dimen name="alarm_toolbar_height">50dp</dimen>
     <dimen name="alarm_toolbar_padding_left">10dp</dimen>
+    <!-- popup -->
+    <dimen name="popup_fragment_width">243dp</dimen>
+    <dimen name="popup_fragment_title_height">48dp</dimen>
+    <dimen name="popup_fragment_title_padding_left">7dp</dimen>
+    <dimen name="popup_fragment_content_padding_top">17dp</dimen>
+    <dimen name="popup_fragment_content_padding_bottom">14dp</dimen>
+    <dimen name="popup_fragment_button_padding_bottom">17dp</dimen>
+    <dimen name="popup_fragment_button_width">104dp</dimen>
+    <dimen name="popup_fragment_button_height">34dp</dimen>
+    <dimen name="popup_fragment_button_padding_right">10dp</dimen>
+    <!-- divider -->
+    <dimen name="divider_height">0.5dp</dimen>
+    <!-- text -->
+    <dimen name="text_size_level2">13sp</dimen>
+    <dimen name="text_size_level3">15sp</dimen>
+    <dimen name="text_size_level4">17sp</dimen>
+    <dimen name="text_size_level5">20sp</dimen>
 
 </resources>

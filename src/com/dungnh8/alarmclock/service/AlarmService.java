@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.dungnh8.alarmclock.Alarm;
 import com.dungnh8.alarmclock.alert.AlarmAlertBroadcastReciever;
+import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.Database;
 
 import android.app.AlarmManager;

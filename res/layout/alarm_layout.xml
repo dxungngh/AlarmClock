@@ -15,7 +15,7 @@
     <!-- List of alarm -->
 
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/alarm_list_of_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:longClickable="true" />

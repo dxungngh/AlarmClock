@@ -1,4 +1,4 @@
-package com.dungnh8.alarmclock;
+package com.dungnh8.alarmclock.database;
 
 import java.io.Serializable;
 import java.util.Arrays;

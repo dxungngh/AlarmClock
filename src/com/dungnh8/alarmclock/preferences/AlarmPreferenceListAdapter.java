@@ -3,7 +3,7 @@ package com.dungnh8.alarmclock.preferences;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dungnh8.alarmclock.Alarm;
+import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.preferences.AlarmPreference.Type;
 
 import android.content.Context;

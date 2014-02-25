@@ -5,6 +5,10 @@
     <color name="title_background_color">#000000</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="gray">#c0c0c0</color>
+    <color name="gray">#8c8e91</color>
+    <color name="divider_color">#343c48</color>
+    <color name="red">#c3443e</color>
+    <color name="dark_blue">#343434</color>
+    <color name="clear_color">#00000000</color>
 
 </resources>

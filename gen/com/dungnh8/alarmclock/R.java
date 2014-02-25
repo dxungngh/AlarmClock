@@ -12,8 +12,12 @@ public final class R {
     }
     public static final class color {
         public static final int black=0x7f040002;
+        public static final int clear_color=0x7f040008;
+        public static final int dark_blue=0x7f040007;
+        public static final int divider_color=0x7f040005;
         public static final int gray=0x7f040004;
         public static final int holo_blue_light=0x7f040000;
+        public static final int red=0x7f040006;
         public static final int title_background_color=0x7f040001;
         public static final int white=0x7f040003;
     }
@@ -28,6 +32,26 @@ public final class R {
          */
         public static final int alarm_toolbar_height=0x7f050004;
         public static final int alarm_toolbar_padding_left=0x7f050005;
+        /**  divider 
+         */
+        public static final int divider_height=0x7f05000f;
+        public static final int popup_fragment_button_height=0x7f05000d;
+        public static final int popup_fragment_button_padding_bottom=0x7f05000b;
+        public static final int popup_fragment_button_padding_right=0x7f05000e;
+        public static final int popup_fragment_button_width=0x7f05000c;
+        public static final int popup_fragment_content_padding_bottom=0x7f05000a;
+        public static final int popup_fragment_content_padding_top=0x7f050009;
+        public static final int popup_fragment_title_height=0x7f050007;
+        public static final int popup_fragment_title_padding_left=0x7f050008;
+        /**  popup 
+         */
+        public static final int popup_fragment_width=0x7f050006;
+        /**  text 
+         */
+        public static final int text_size_level2=0x7f050010;
+        public static final int text_size_level3=0x7f050011;
+        public static final int text_size_level4=0x7f050012;
+        public static final int text_size_level5=0x7f050013;
     }
     public static final class drawable {
         public static final int bg_button=0x7f020000;
@@ -35,6 +59,9 @@ public final class R {
         public static final int checkbox=0x7f020002;
         public static final int checked_box=0x7f020003;
         public static final int ic_launcher=0x7f020004;
+        public static final int rounded_button=0x7f020005;
+        public static final int rounded_button_normal=0x7f020006;
+        public static final int rounded_button_press=0x7f020007;
     }
     public static final class id {
         public static final int Button0=0x7f090012;
@@ -52,14 +79,22 @@ public final class R {
         public static final int Button_minus=0x7f090013;
         public static final int TableRow3=0x7f090008;
         public static final int TableRow4=0x7f09000c;
-        public static final int button_delete=0x7f09001b;
-        public static final int button_new=0x7f090022;
-        public static final int checkBox_alarm_active=0x7f090018;
-        public static final int menu_item_contact_author=0x7f090025;
-        public static final int menu_item_other_apps=0x7f090024;
-        public static final int menu_item_rate=0x7f090023;
-        public static final int okCancel=0x7f09001e;
-        public static final int okCancel_border_top=0x7f09001d;
+        public static final int alarm_list_of_alarm=0x7f090016;
+        public static final int button_delete=0x7f090029;
+        public static final int button_new=0x7f090028;
+        public static final int checkBox_alarm_active=0x7f090019;
+        public static final int menu_item_contact_author=0x7f09002d;
+        public static final int menu_item_other_apps=0x7f09002c;
+        public static final int menu_item_rate=0x7f09002b;
+        public static final int okCancel=0x7f09001b;
+        public static final int okCancel_border_top=0x7f09001a;
+        public static final int popup_fragment_one_button_content=0x7f090020;
+        public static final int popup_fragment_one_button_title=0x7f09001f;
+        public static final int popup_fragment_one_button_yes_button=0x7f090021;
+        public static final int popup_fragment_two_button_content=0x7f090023;
+        public static final int popup_fragment_two_button_no_button=0x7f090025;
+        public static final int popup_fragment_two_button_title=0x7f090022;
+        public static final int popup_fragment_two_button_yes_button=0x7f090024;
         public static final int tableRow0=0x7f090000;
         public static final int tableRow1=0x7f090002;
         public static final int tableRow2=0x7f090004;
@@ -67,21 +102,23 @@ public final class R {
         public static final int tableRow6=0x7f090014;
         public static final int textView1=0x7f090001;
         public static final int textView2=0x7f090003;
-        public static final int textView_OK=0x7f090021;
-        public static final int textView_alarm_days=0x7f090017;
-        public static final int textView_alarm_time=0x7f090016;
-        public static final int textView_cancel=0x7f09001f;
-        public static final int textView_title_bar=0x7f09001a;
-        public static final int title_border_bottom=0x7f09001c;
-        public static final int toolbar=0x7f090019;
-        public static final int view1=0x7f090020;
+        public static final int textView_OK=0x7f09001e;
+        public static final int textView_alarm_days=0x7f090018;
+        public static final int textView_alarm_time=0x7f090017;
+        public static final int textView_cancel=0x7f09001c;
+        public static final int textView_title_bar=0x7f090027;
+        public static final int title_border_bottom=0x7f09002a;
+        public static final int toolbar=0x7f090026;
+        public static final int view1=0x7f09001d;
     }
     public static final class layout {
-        public static final int alarm_activity=0x7f030000;
-        public static final int alarm_alert=0x7f030001;
+        public static final int alarm_alert=0x7f030000;
+        public static final int alarm_layout=0x7f030001;
         public static final int alarm_list_element=0x7f030002;
         public static final int alarm_preferences=0x7f030003;
-        public static final int toolbar=0x7f030004;
+        public static final int popup_fragment_one_button=0x7f030004;
+        public static final int popup_fragment_two_button=0x7f030005;
+        public static final int toolbar=0x7f030006;
     }
     public static final class menu {
         public static final int menu=0x7f080000;
@@ -157,6 +194,7 @@ public final class R {
         /**  Application theme. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int MyTheme=0x7f070004;
         public static final int WindowTitleBackground=0x7f070002;
         public static final int WindowTitleFont=0x7f070003;
     }

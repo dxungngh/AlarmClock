@@ -1,12 +1,9 @@
 package com.dungnh8.alarmclock;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,37 +12,41 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.dungnh8.alarmclock.adapter.AlarmListAdapter;
+import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.Database;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
+import com.dungnh8.alarmclock.helper.MathAlarmServiceHelper;
 import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
-import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
-import com.dungnh8.alarmclock.util.Constants;
+import com.dungnh8.alarmclock.ui.PopupFragment;
 
-public class AlarmActivity extends ListActivity implements
-		android.view.View.OnClickListener {
-	private ImageButton newButton;
+public class AlarmActivity extends FragmentActivity {
+	private ImageButton newButton, deleteButton;
 	private ListView mathAlarmListView;
 	private AlarmListAdapter alarmListAdapter;
+	private PopupFragment popupFragment;
+	private static final String TAG = "AlarmActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.alarm_activity);
+		setContentView(R.layout.alarm_layout);
 		setComponentView();
 		setListener();
-		callMathAlarmScheduleService();
+		MathAlarmServiceHelper.callMathAlarmScheduleService(this);
 	}
 
 	private void setComponentView() {
-		newButton = (ImageButton) findViewById(com.dungnh8.alarmclock.R.id.button_new);
-		mathAlarmListView = (ListView) findViewById(android.R.id.list);
+		newButton = (ImageButton) findViewById(R.id.button_new);
+		deleteButton = (ImageButton) findViewById(R.id.button_delete);
+		mathAlarmListView = (ListView) findViewById(R.id.alarm_list_of_alarm);
+		// hide delete button
+		deleteButton.setVisibility(View.GONE);
 	}
 
 	private void setListener() {
@@ -82,47 +83,53 @@ public class AlarmActivity extends ListActivity implements
 						view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 						final Alarm alarm = (Alarm) alarmListAdapter
 								.getItem(position);
-						Builder dialog = new AlertDialog.Builder(
-								AlarmActivity.this);
-						dialog.setTitle(AlarmActivity.this
-								.getString(R.string.delete));
-						dialog.setMessage(AlarmActivity.this
-								.getString(R.string.delete_this_alarm));
-						dialog.setPositiveButton(
-								AlarmActivity.this.getString(R.string.ok),
-								new OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										alarmListAdapter.getMathAlarms()
-												.remove(alarm);
-										alarmListAdapter.notifyDataSetChanged();
-										Database.init(AlarmActivity.this);
-										Database.deleteEntry(alarm);
-										AlarmActivity.this
-												.callMathAlarmScheduleService();
-									}
-								});
-						dialog.setNegativeButton(getString(R.string.cancel),
-								new OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										dialog.dismiss();
-									}
-								});
-						dialog.show();
+						showPopupDeleteAlarm(alarm);
 						return true;
 					}
 				});
 	}
 
-	private void callMathAlarmScheduleService() {
-		Intent mathAlarmServiceIntent = new Intent(AlarmActivity.this,
-				AlarmServiceBroadcastReciever.class);
-		sendBroadcast(mathAlarmServiceIntent, null);
+	/**
+	 * show popup delete this alarm
+	 * 
+	 * @author dungnh8
+	 * @param alarm
+	 */
+	private void showPopupDeleteAlarm(final Alarm alarm) {
+		View.OnClickListener yesListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					alarmListAdapter.getMathAlarms().remove(alarm);
+					alarmListAdapter.notifyDataSetChanged();
+					Database.init(AlarmActivity.this);
+					Database.deleteEntry(alarm);
+					MathAlarmServiceHelper
+							.callMathAlarmScheduleService(AlarmActivity.this);
+					popupFragment.dismiss();
+				} catch (Exception e) {
+					Log.e(TAG, "setMathAlarmListener", e);
+				}
+			}
+		};
+		View.OnClickListener noListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					popupFragment.dismiss();
+				} catch (Exception e) {
+					Log.e(TAG, "setMathAlarmListener", e);
+				}
+			}
+		};
+		// show popup
+		String title = getString(R.string.app_name);
+		String message = getString(R.string.delete_this_alarm);
+		String yesLabel = getString(R.string.ok);
+		String noLabel = getString(R.string.cancel);
+		popupFragment = PopupFragment.newInstance(title, message, yesLabel,
+				noLabel, yesListener, noListener);
+		popupFragment.show(getSupportFragmentManager(), TAG);
 	}
 
 	@Override
@@ -142,40 +149,7 @@ public class AlarmActivity extends ListActivity implements
 		} else {
 			alarmListAdapter = (AlarmListAdapter) data;
 		}
-		this.setListAdapter(alarmListAdapter);
-	}
-
-	@Override
-	public Object onRetainNonConfigurationInstance() {
-		return alarmListAdapter;
-	}
-
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-		Alarm alarm = (Alarm) alarmListAdapter.getItem(position);
-		Intent intent = new Intent(AlarmActivity.this,
-				AlarmPreferencesActivity.class);
-		intent.putExtra(Constants.ALARM, alarm);
-		startActivity(intent);
-	}
-
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.checkBox_alarm_active) {
-			CheckBox checkBox = (CheckBox) v;
-			Alarm alarm = (Alarm) alarmListAdapter.getItem((Integer) checkBox
-					.getTag());
-			alarm.setAlarmActive(checkBox.isChecked());
-			Database.update(alarm);
-			AlarmActivity.this.callMathAlarmScheduleService();
-			if (checkBox.isChecked()) {
-				Toast.makeText(AlarmActivity.this,
-						alarm.getTimeUntilNextAlarmMessage(), Toast.LENGTH_LONG)
-						.show();
-			}
-		}
+		mathAlarmListView.setAdapter(alarmListAdapter);
 	}
 
 	@Override

@@ -9,8 +9,7 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dungnh8.alarmclock.Alarm;
-import com.dungnh8.alarmclock.Alarm.Difficulty;
+import com.dungnh8.alarmclock.database.Alarm.Difficulty;
 
 import android.content.ContentValues;
 import android.content.Context;

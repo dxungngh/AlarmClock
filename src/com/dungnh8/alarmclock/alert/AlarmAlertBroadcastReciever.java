@@ -1,6 +1,6 @@
 package com.dungnh8.alarmclock.alert;
 
-import com.dungnh8.alarmclock.Alarm;
+import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
 
 import android.content.BroadcastReceiver;
