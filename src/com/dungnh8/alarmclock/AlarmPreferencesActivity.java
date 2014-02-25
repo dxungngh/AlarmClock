@@ -1,4 +1,4 @@
-package com.dungnh8.alarmclock.preferences;
+package com.dungnh8.alarmclock;
 
 import java.util.Calendar;
 
@@ -35,11 +35,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.dungnh8.alarmclock.R;
+import com.dungnh8.alarmclock.adapter.AlarmPreferenceListAdapter;
 import com.dungnh8.alarmclock.database.Alarm;
+import com.dungnh8.alarmclock.database.AlarmPreference;
 import com.dungnh8.alarmclock.database.Database;
+import com.dungnh8.alarmclock.database.AlarmPreference.Key;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
-import com.dungnh8.alarmclock.preferences.AlarmPreference.Key;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
 import com.dungnh8.alarmclock.util.Constants;
 
@@ -81,57 +83,40 @@ public class AlarmPreferencesActivity extends ListActivity {
 	 * @author dungnh8
 	 */
 	private void setDeleteListener() {
-		deleteButton.setOnTouchListener(new OnTouchListener() {
+		deleteButton.setOnClickListener(new View.OnClickListener() {
+
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+			public void onClick(View v) {
+				Builder dialog = new AlertDialog.Builder(
+						AlarmPreferencesActivity.this);
+				dialog.setTitle(getString(R.string.delete));
+				dialog.setMessage(getString(R.string.delete_this_alarm));
+				dialog.setPositiveButton(getString(R.string.ok),
+						new OnClickListener() {
 
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					deleteButton.setBackgroundColor(getResources().getColor(
-							R.color.holo_blue_light));
-					break;
-				case MotionEvent.ACTION_UP:
-					v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-
-					Builder dialog = new AlertDialog.Builder(
-							AlarmPreferencesActivity.this);
-					dialog.setTitle(getString(R.string.delete));
-					dialog.setMessage(getString(R.string.delete_this_alarm));
-					dialog.setPositiveButton(getString(R.string.ok),
-							new OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-
-									Database.init(getApplicationContext());
-									if (getMathAlarm().getId() < 1) {
-										// Alarm not saved
-									} else {
-										Database.deleteEntry(alarm);
-										callMathAlarmScheduleService();
-									}
-									finish();
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Database.init(getApplicationContext());
+								if (getMathAlarm().getId() < 1) {
+									// Alarm not saved
+								} else {
+									Database.deleteEntry(alarm);
+									callMathAlarmScheduleService();
 								}
-							});
-					dialog.setNegativeButton(getString(R.string.cancel),
-							new OnClickListener() {
+								finish();
+							}
+						});
+				dialog.setNegativeButton(getString(R.string.cancel),
+						new OnClickListener() {
 
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									dialog.dismiss();
-								}
-							});
-					dialog.show();
-
-				case MotionEvent.ACTION_MOVE:
-				case MotionEvent.ACTION_CANCEL:
-					deleteButton.setBackgroundColor(getResources().getColor(
-							android.R.color.transparent));
-					break;
-				}
-				return true;
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+							}
+						});
+				dialog.show();
 			}
 		});
 	}

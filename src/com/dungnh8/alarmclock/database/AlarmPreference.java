@@ -1,4 +1,4 @@
-package com.dungnh8.alarmclock.preferences;
+package com.dungnh8.alarmclock.database;
 
 public class AlarmPreference {
 

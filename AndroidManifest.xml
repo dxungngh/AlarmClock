@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity"
+            android:name="com.dungnh8.alarmclock.AlarmPreferencesActivity"
             android:label="@string/app_name" >
         </activity>
 

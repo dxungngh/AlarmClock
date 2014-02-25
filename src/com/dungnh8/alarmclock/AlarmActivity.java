@@ -25,7 +25,6 @@ import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.helper.MathAlarmServiceHelper;
 import com.dungnh8.alarmclock.listener.OnChangedAlarmsListener;
-import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
 
 public class AlarmActivity extends FragmentActivity implements
 		OnChangedAlarmsListener {

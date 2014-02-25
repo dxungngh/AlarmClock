@@ -44,28 +44,24 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_button"
             android:clickable="true"
             android:gravity="center"
             android:text="@string/cancel"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/primary_text_dark" />
-
-        <View
-            android:id="@+id/view1"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#333333" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/textView_OK"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_button"
             android:clickable="true"
             android:gravity="center"
             android:text="@string/ok"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/primary_text_dark" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

@@ -13,12 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dungnh8.alarmclock.AlarmPreferencesActivity;
 import com.dungnh8.alarmclock.R;
 import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.Database;
 import com.dungnh8.alarmclock.helper.DrawHelper;
 import com.dungnh8.alarmclock.helper.MathAlarmServiceHelper;
-import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
 import com.dungnh8.alarmclock.ui.PopupFragment;
 import com.dungnh8.alarmclock.util.Constants;
 
