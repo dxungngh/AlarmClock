@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -12,8 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,24 +20,27 @@ import android.widget.TextView;
 import com.dungnh8.alarmclock.adapter.AlarmListAdapter;
 import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.Database;
+import com.dungnh8.alarmclock.helper.DrawHelper;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.helper.MathAlarmServiceHelper;
+import com.dungnh8.alarmclock.listener.OnChangedAlarmsListener;
 import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
-import com.dungnh8.alarmclock.ui.PopupFragment;
 
-public class AlarmActivity extends FragmentActivity {
+public class AlarmActivity extends FragmentActivity implements
+		OnChangedAlarmsListener {
 	private List<Alarm> alarms;
 	private ImageButton newButton, deleteButton;
 	private ListView mathAlarmListView;
 	private TextView emptyWarningTextView;
 	private AlarmListAdapter alarmListAdapter;
-	private PopupFragment popupFragment;
+	private Handler mHandler;
 	private static final String TAG = "AlarmActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mHandler = new Handler();
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.alarm_layout);
 		setComponentView();
@@ -57,7 +59,6 @@ public class AlarmActivity extends FragmentActivity {
 
 	private void setListener() {
 		setNewButtonListener();
-		setMathAlarmListener();
 	}
 
 	/**
@@ -78,83 +79,39 @@ public class AlarmActivity extends FragmentActivity {
 		});
 	}
 
-	private void setMathAlarmListener() {
-		mathAlarmListView.setLongClickable(true);
-		mathAlarmListView
-				.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-					@Override
-					public boolean onItemLongClick(AdapterView<?> adapterView,
-							View view, int position, long id) {
-						view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-						final Alarm alarm = (Alarm) alarmListAdapter
-								.getItem(position);
-						showPopupDeleteAlarm(alarm);
-						return true;
-					}
-				});
-	}
-
-	/**
-	 * show popup delete this alarm
-	 * 
-	 * @author dungnh8
-	 * @param alarm
-	 */
-	private void showPopupDeleteAlarm(final Alarm alarm) {
-		View.OnClickListener yesListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				try {
-					alarmListAdapter.getMathAlarms().remove(alarm);
-					alarmListAdapter.notifyDataSetChanged();
-					Database.init(AlarmActivity.this);
-					Database.deleteEntry(alarm);
-					MathAlarmServiceHelper
-							.callMathAlarmScheduleService(AlarmActivity.this);
-					popupFragment.dismiss();
-				} catch (Exception e) {
-					Log.e(TAG, "setMathAlarmListener", e);
-				}
-			}
-		};
-		View.OnClickListener noListener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				try {
-					popupFragment.dismiss();
-				} catch (Exception e) {
-					Log.e(TAG, "setMathAlarmListener", e);
-				}
-			}
-		};
-		// show popup
-		String title = getString(R.string.app_name);
-		String message = getString(R.string.delete_this_alarm);
-		String yesLabel = getString(R.string.ok);
-		String noLabel = getString(R.string.cancel);
-		popupFragment = PopupFragment.newInstance(title, message, yesLabel,
-				noLabel, yesListener, noListener);
-		popupFragment.show(getSupportFragmentManager(), TAG);
-	}
-
-	@Override
-	protected void onPause() {
-		Database.deactivate();
-		super.onPause();
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Database.init(this);
-		alarms = Database.getAll();
-		if (alarms == null || alarms.size() <= 0) {
-			emptyWarningTextView.setVisibility(View.VISIBLE);
-		} else {
-			emptyWarningTextView.setVisibility(View.GONE);
-			alarmListAdapter = new AlarmListAdapter(this, alarms);
-			mathAlarmListView.setAdapter(alarmListAdapter);
+		DrawHelper.addOnChangedAlarmsListener(this);
+		drawContent();
+	}
+
+	@Override
+	protected void onDestroy() {
+		DrawHelper.removeOnChangedAlarmsListener(this);
+		Database.deactivate();
+		super.onDestroy();
+	}
+
+	/**
+	 * draw content
+	 * 
+	 * @author dungnh8
+	 */
+	private void drawContent() {
+		try {
+			Database.init(this);
+			alarms = Database.getAll();
+			if (alarms == null || alarms.size() <= 0) {
+				emptyWarningTextView.setVisibility(View.VISIBLE);
+			} else {
+				emptyWarningTextView.setVisibility(View.GONE);
+				alarmListAdapter = new AlarmListAdapter(this, alarms,
+						getSupportFragmentManager());
+				mathAlarmListView.setAdapter(alarmListAdapter);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "drawContent", e);
 		}
 	}
 
@@ -179,5 +136,22 @@ public class AlarmActivity extends FragmentActivity {
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onChangedAlarms() {
+		mHandler.post(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Database.init(AlarmActivity.this);
+					alarms = Database.getAll();
+					alarmListAdapter.notifyDataSetChanged();
+				} catch (Exception e) {
+					Log.e(TAG, "", e);
+				}
+			}
+		});
 	}
 }

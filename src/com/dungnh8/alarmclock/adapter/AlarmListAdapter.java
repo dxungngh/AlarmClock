@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,17 @@ import com.dungnh8.alarmclock.holder.AlarmHolder;
 public class AlarmListAdapter extends BaseAdapter {
 
 	private Context mContext;
+	private FragmentManager fragmentManager;
 	private LayoutInflater inflater;
 	private List<Alarm> alarms = new ArrayList<Alarm>();
 
 	public static final String ALARM_FIELDS[] = { Database.COLUMN_ALARM_ACTIVE,
 			Database.COLUMN_ALARM_TIME, Database.COLUMN_ALARM_DAYS };
 
-	public AlarmListAdapter(AlarmActivity alarmActivity, List<Alarm> alarms) {
+	public AlarmListAdapter(AlarmActivity alarmActivity, List<Alarm> alarms,
+			FragmentManager fragmentManager) {
 		mContext = alarmActivity;
+		this.fragmentManager = fragmentManager;
 		inflater = LayoutInflater.from(this.mContext);
 		this.alarms = alarms;
 	}
@@ -50,7 +54,7 @@ public class AlarmListAdapter extends BaseAdapter {
 		AbsContentHolder holder;
 		Alarm alarm = (Alarm) getItem(position);
 		if (convertView == null) {
-			holder = new AlarmHolder(mContext);
+			holder = new AlarmHolder(mContext, fragmentManager);
 			holder.initHolder(parent, convertView, position, inflater);
 		} else {
 			holder = (AlarmHolder) convertView.getTag();
