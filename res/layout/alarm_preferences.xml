@@ -17,6 +17,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/white"
         android:drawSelectorOnTop="false" />
 
     <TextView
@@ -42,7 +43,7 @@
         <TextView
             android:id="@+id/textView_cancel"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/alarm_preferences_button_height"
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:clickable="true"
@@ -54,7 +55,7 @@
         <TextView
             android:id="@+id/textView_OK"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/alarm_preferences_button_height"
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:clickable="true"

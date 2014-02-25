@@ -28,6 +28,9 @@ public final class R {
         public static final int alarm_list_element_padding_left=0x7f050000;
         public static final int alarm_list_element_padding_right=0x7f050001;
         public static final int alarm_list_element_padding_top=0x7f050002;
+        /**  alarm preferences 
+         */
+        public static final int alarm_preferences_button_height=0x7f050014;
         /**  alarm activity 
          */
         public static final int alarm_toolbar_height=0x7f050004;

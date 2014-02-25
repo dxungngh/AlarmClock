@@ -25,5 +25,7 @@
     <dimen name="text_size_level3">15sp</dimen>
     <dimen name="text_size_level4">17sp</dimen>
     <dimen name="text_size_level5">20sp</dimen>
+    <!-- alarm preferences -->
+    <dimen name="alarm_preferences_button_height">50dp</dimen>
 
 </resources>
