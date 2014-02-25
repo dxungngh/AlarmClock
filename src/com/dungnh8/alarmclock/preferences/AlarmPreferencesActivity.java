@@ -41,6 +41,7 @@ import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.preferences.AlarmPreference.Key;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
+import com.dungnh8.alarmclock.util.Constants;
 
 public class AlarmPreferencesActivity extends ListActivity {
 
@@ -56,9 +57,30 @@ public class AlarmPreferencesActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.alarm_preferences);
+		setComponentView();
+		setListener();
+		getDataFromBundle();
+	}
 
-		deleteButton = (ImageButton) findViewById(R.id.toolbar).findViewById(
-				R.id.button_delete);
+	private void getDataFromBundle() {
+		Bundle bundle = getIntent().getExtras();
+		if (bundle != null && bundle.containsKey(Constants.ALARM)) {
+			setMathAlarm((Alarm) bundle.getSerializable(Constants.ALARM));
+		}
+	}
+
+	private void setListener() {
+		setDeleteListener();
+		setOkListener();
+		setCancelListener();
+	}
+
+	/**
+	 * delete this alarm
+	 * 
+	 * @author dungnh8
+	 */
+	private void setDeleteListener() {
 		deleteButton.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -73,30 +95,34 @@ public class AlarmPreferencesActivity extends ListActivity {
 
 					Builder dialog = new AlertDialog.Builder(
 							AlarmPreferencesActivity.this);
-					dialog.setTitle("Delete");
-					dialog.setMessage("Delete this alarm?");
-					dialog.setPositiveButton("Ok", new OnClickListener() {
+					dialog.setTitle(getString(R.string.delete));
+					dialog.setMessage(getString(R.string.delete_this_alarm));
+					dialog.setPositiveButton(getString(R.string.ok),
+							new OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
 
-							Database.init(getApplicationContext());
-							if (getMathAlarm().getId() < 1) {
-								// Alarm not saved
-							} else {
-								Database.deleteEntry(alarm);
-								callMathAlarmScheduleService();
-							}
-							finish();
-						}
-					});
-					dialog.setNegativeButton("Cancel", new OnClickListener() {
+									Database.init(getApplicationContext());
+									if (getMathAlarm().getId() < 1) {
+										// Alarm not saved
+									} else {
+										Database.deleteEntry(alarm);
+										callMathAlarmScheduleService();
+									}
+									finish();
+								}
+							});
+					dialog.setNegativeButton(getString(R.string.cancel),
+							new OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
-					});
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
 					dialog.show();
 
 				case MotionEvent.ACTION_MOVE:
@@ -108,8 +134,14 @@ public class AlarmPreferencesActivity extends ListActivity {
 				return true;
 			}
 		});
+	}
 
-		okButton = (TextView) findViewById(R.id.textView_OK);
+	/**
+	 * edit this alarm successfully
+	 * 
+	 * @author dungnh8
+	 */
+	private void setOkListener() {
 		okButton.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -141,8 +173,14 @@ public class AlarmPreferencesActivity extends ListActivity {
 				return true;
 			}
 		});
+	}
 
-		cancelButton = (TextView) findViewById(R.id.textView_cancel);
+	/**
+	 * cancel this alarm
+	 * 
+	 * @author dungnh8
+	 */
+	private void setCancelListener() {
 		cancelButton.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -164,12 +202,18 @@ public class AlarmPreferencesActivity extends ListActivity {
 				return true;
 			}
 		});
+	}
 
-		Bundle bundle = getIntent().getExtras();
-		if (bundle != null && bundle.containsKey("alarm")) {
-			setMathAlarm((Alarm) bundle.getSerializable("alarm"));
-		}
-
+	/**
+	 * set component view
+	 * 
+	 * @author dungnh8
+	 */
+	private void setComponentView() {
+		deleteButton = (ImageButton) findViewById(R.id.toolbar).findViewById(
+				R.id.button_delete);
+		okButton = (TextView) findViewById(R.id.textView_OK);
+		cancelButton = (TextView) findViewById(R.id.textView_cancel);
 	}
 
 	private void callMathAlarmScheduleService() {

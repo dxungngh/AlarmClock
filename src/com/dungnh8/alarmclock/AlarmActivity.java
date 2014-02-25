@@ -25,6 +25,7 @@ import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
+import com.dungnh8.alarmclock.util.Constants;
 
 public class AlarmActivity extends ListActivity implements
 		android.view.View.OnClickListener {
@@ -126,7 +127,6 @@ public class AlarmActivity extends ListActivity implements
 
 	@Override
 	protected void onPause() {
-		// setListAdapter(null);
 		Database.deactivate();
 		super.onPause();
 	}
@@ -157,7 +157,7 @@ public class AlarmActivity extends ListActivity implements
 		Alarm alarm = (Alarm) alarmListAdapter.getItem(position);
 		Intent intent = new Intent(AlarmActivity.this,
 				AlarmPreferencesActivity.class);
-		intent.putExtra("alarm", alarm);
+		intent.putExtra(Constants.ALARM, alarm);
 		startActivity(intent);
 	}
 
