@@ -1,5 +1,7 @@
 package com.dungnh8.alarmclock;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.dungnh8.alarmclock.adapter.AlarmListAdapter;
 import com.dungnh8.alarmclock.database.Alarm;
@@ -25,8 +28,10 @@ import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
 import com.dungnh8.alarmclock.ui.PopupFragment;
 
 public class AlarmActivity extends FragmentActivity {
+	private List<Alarm> alarms;
 	private ImageButton newButton, deleteButton;
 	private ListView mathAlarmListView;
+	private TextView emptyWarningTextView;
 	private AlarmListAdapter alarmListAdapter;
 	private PopupFragment popupFragment;
 	private static final String TAG = "AlarmActivity";
@@ -45,6 +50,7 @@ public class AlarmActivity extends FragmentActivity {
 		newButton = (ImageButton) findViewById(R.id.button_new);
 		deleteButton = (ImageButton) findViewById(R.id.button_delete);
 		mathAlarmListView = (ListView) findViewById(R.id.alarm_list_of_alarm);
+		emptyWarningTextView = (TextView) findViewById(R.id.alarm_empty_warning);
 		// hide delete button
 		deleteButton.setVisibility(View.GONE);
 	}
@@ -141,15 +147,15 @@ public class AlarmActivity extends FragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
-		@SuppressWarnings("deprecation")
-		final Object data = getLastNonConfigurationInstance();
-		if (data == null) {
-			alarmListAdapter = new AlarmListAdapter(this);
+		Database.init(this);
+		alarms = Database.getAll();
+		if (alarms == null || alarms.size() <= 0) {
+			emptyWarningTextView.setVisibility(View.VISIBLE);
 		} else {
-			alarmListAdapter = (AlarmListAdapter) data;
+			emptyWarningTextView.setVisibility(View.GONE);
+			alarmListAdapter = new AlarmListAdapter(this, alarms);
+			mathAlarmListView.setAdapter(alarmListAdapter);
 		}
-		mathAlarmListView.setAdapter(alarmListAdapter);
 	}
 
 	@Override

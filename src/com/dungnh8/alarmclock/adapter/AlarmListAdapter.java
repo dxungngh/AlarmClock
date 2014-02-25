@@ -24,11 +24,10 @@ public class AlarmListAdapter extends BaseAdapter {
 	public static final String ALARM_FIELDS[] = { Database.COLUMN_ALARM_ACTIVE,
 			Database.COLUMN_ALARM_TIME, Database.COLUMN_ALARM_DAYS };
 
-	public AlarmListAdapter(AlarmActivity alarmActivity) {
+	public AlarmListAdapter(AlarmActivity alarmActivity, List<Alarm> alarms) {
 		mContext = alarmActivity;
 		inflater = LayoutInflater.from(this.mContext);
-		Database.init(mContext);
-		alarms = Database.getAll();
+		this.alarms = alarms;
 	}
 
 	@Override

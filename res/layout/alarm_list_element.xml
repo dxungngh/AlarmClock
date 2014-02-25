@@ -43,7 +43,6 @@
             android:id="@+id/checkBox_alarm_active"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_checkbox"
             android:focusable="false"
             android:paddingRight="@dimen/alarm_list_element_padding_right" />
     </LinearLayout>
