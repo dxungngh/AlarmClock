@@ -9,8 +9,8 @@
 
     <!-- Menu -->
     <string name="menu_item_rate">Đánh giá phần mềm</string>
-    <string name="menu_item_website">Website</string>
-    <string name="menu_item_report">Liên hệ tác giả</string>
+    <string name="menu_item_other_apps">Phần mềm khác</string>
+    <string name="menu_item_contact_author">Liên hệ tác giả</string>
 
     <!-- Alert -->
     <string name="_0">0</string>
@@ -29,5 +29,7 @@
     <string name="button_delete">Xóa</string>
     <string name="ok">Đồng ý</string>
     <string name="cancel">Hủy</string>
+    <!-- Toast -->
+    <string name="could_not_launch_the_market">Không thể mở được Google Play</string>
 
 </resources>

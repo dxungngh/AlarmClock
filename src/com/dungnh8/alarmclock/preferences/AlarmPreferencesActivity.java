@@ -7,7 +7,6 @@ import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
@@ -19,7 +18,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,6 +37,8 @@ import android.widget.Toast;
 import com.dungnh8.alarmclock.Alarm;
 import com.dungnh8.alarmclock.R;
 import com.dungnh8.alarmclock.database.Database;
+import com.dungnh8.alarmclock.helper.EmailHelper;
+import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.preferences.AlarmPreference.Key;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
 
@@ -460,31 +460,13 @@ public class AlarmPreferencesActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_item_rate:
-			Uri uri = Uri.parse("market://details?id=" + getPackageName());
-			Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-			try {
-				startActivity(goToMarket);
-			} catch (ActivityNotFoundException e) {
-				Toast.makeText(this, "Couldn't launch the market",
-						Toast.LENGTH_LONG).show();
-			}
+			MarketHelper.openMyApplication(this);
 			break;
-		case R.id.menu_item_website:
-			startActivity(new Intent(Intent.ACTION_VIEW,
-					Uri.parse(getString(R.string.website))));
+		case R.id.menu_item_other_apps:
+			MarketHelper.openMyStore(this);
 			break;
-		case R.id.menu_item_report:
-			try {
-				String to = getString(R.string.email);
-				Intent email = new Intent(Intent.ACTION_SEND);
-				email.putExtra(Intent.EXTRA_EMAIL, new String[] { to });
-				// need this to prompts email client only
-				email.setType("message/rfc822");
-				startActivity(Intent.createChooser(email,
-						getString(R.string.send_email)));
-			} catch (Exception e) {
-				Log.e(TAG, "emailListener", e);
-			}
+		case R.id.menu_item_contact_author:
+			EmailHelper.sendEmailToAuthor(this);
 			break;
 		}
 		return super.onOptionsItemSelected(item);

@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="right|center_vertical"
+    android:background="@color/white"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:weightSum="10" >
 
@@ -19,21 +20,32 @@
             android:id="@+id/textView_alarm_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="6:00 AM"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/primary_text_light" />
 
         <TextView
             android:id="@+id/textView_alarm_days"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:text="Every day"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/primary_text_light" />
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkBox_alarm_active"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_weight="2"
-        android:focusable="false"
-        android:paddingRight="@dimen/alarm_list_element_padding_right" />
+        android:gravity="center" >
+
+        <CheckBox
+            android:id="@+id/checkBox_alarm_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_checkbox"
+            android:focusable="false"
+            android:paddingRight="@dimen/alarm_list_element_padding_right" />
+    </LinearLayout>
 
 </LinearLayout>

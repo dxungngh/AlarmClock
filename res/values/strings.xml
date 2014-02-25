@@ -3,7 +3,7 @@
 
     <!-- Daniel Nguyen -->
     <string name="email">dxungngh@gmail.com</string>
-    <string name="website">market://search?q=pub:Nguyen%20Hoang%20Dung</string>
+    <string name="my_store">market://search?q=pub:Nguyen%20Hoang%20Dung</string>
     <string name="send_email">Send email</string>
     <!-- Math Alarm Activity -->
     <string name="app_name">Funny Alarm</string>
@@ -13,8 +13,8 @@
 
     <!-- Menu -->
     <string name="menu_item_rate">Rate on Goolge Play</string>
-    <string name="menu_item_website">Website</string>
-    <string name="menu_item_report">Report a Bug</string>
+    <string name="menu_item_other_apps">Other Applications</string>
+    <string name="menu_item_contact_author">Send mail to author</string>
 
     <!-- Alert -->
     <string name="_0">0</string>
@@ -35,5 +35,7 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="delete_this_alarm">Delete this alarm ?</string>
+    <!-- Toast -->
+    <string name="could_not_launch_the_market">Could not launch the market</string>
 
 </resources>
