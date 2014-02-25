@@ -1,12 +1,5 @@
 package com.dungnh8.alarmclock;
 
-import com.dungnh8.alarmclock.database.Database;
-import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
-import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
-
-import com.dungnh8.alarmclock.R;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
@@ -15,13 +8,13 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -29,6 +22,10 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.dungnh8.alarmclock.database.Database;
+import com.dungnh8.alarmclock.preferences.AlarmPreferencesActivity;
+import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
 
 public class AlarmActivity extends ListActivity implements
 		android.view.View.OnClickListener {
@@ -57,27 +54,14 @@ public class AlarmActivity extends ListActivity implements
 	}
 
 	private void setNewButtonListener() {
-		newButton.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+		newButton.setOnClickListener(new View.OnClickListener() {
 
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					newButton.setBackgroundColor(getResources().getColor(
-							R.color.holo_blue_light));
-					break;
-				case MotionEvent.ACTION_UP:
-					v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-					Intent newAlarmIntent = new Intent(AlarmActivity.this,
-							AlarmPreferencesActivity.class);
-					startActivity(newAlarmIntent);
-				case MotionEvent.ACTION_MOVE:
-				case MotionEvent.ACTION_CANCEL:
-					newButton.setBackgroundColor(getResources().getColor(
-							android.R.color.transparent));
-					break;
-				}
-				return true;
+			@Override
+			public void onClick(View v) {
+				v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+				Intent newAlarmIntent = new Intent(AlarmActivity.this,
+						AlarmPreferencesActivity.class);
+				startActivity(newAlarmIntent);
 			}
 		});
 	}

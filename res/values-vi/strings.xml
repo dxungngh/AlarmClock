@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Math Alarm Activity -->
-    <string name="app_name">Đồng Hồ Báo Thức</string>
+    <string name="app_name">Đồng Hồ Vui</string>
     <string name="title_activity_set_alarms">Đặt báo thức</string>
     <string name="no_alarms">Không có báo thức nào được đặt</string>
     <string name="button_new">Tạo mới</string>

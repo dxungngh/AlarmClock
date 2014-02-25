@@ -1,43 +1,39 @@
-   <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    	xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right|center_vertical"
+    android:orientation="horizontal"
+    android:weightSum="10" >
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp" >
- 
-        <CheckBox
-            android:id="@+id/checkBox_alarm_active"
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/alarm_list_element_padding_bottom"
+        android:paddingLeft="@dimen/alarm_list_element_padding_left"
+        android:paddingTop="@dimen/alarm_list_element_padding_top" >
+
+        <TextView
+            android:id="@+id/textView_alarm_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:focusable="false" />
-        <View
-            android:id="@+id/view1"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="#333333"
-            android:paddingRight="10dp" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView_alarm_days"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-        	android:paddingBottom="5dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/textView_alarm_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView_alarm_days"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        </LinearLayout>
-
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkBox_alarm_active"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:focusable="false"
+        android:paddingRight="@dimen/alarm_list_element_padding_right" />
+
+</LinearLayout>
