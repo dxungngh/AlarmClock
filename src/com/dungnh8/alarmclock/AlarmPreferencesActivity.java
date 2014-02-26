@@ -45,7 +45,6 @@ import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
 import com.dungnh8.alarmclock.util.Constants;
 
 public class AlarmPreferencesActivity extends ListActivity {
-
 	private ImageButton deleteButton, newButton;
 	private TextView okButton;
 	private TextView cancelButton;
@@ -214,31 +213,23 @@ public class AlarmPreferencesActivity extends ListActivity {
 			alarmPreference.setValue(checked);
 			break;
 		case STRING:
-
 			alert = new AlertDialog.Builder(this);
-
 			alert.setTitle(alarmPreference.getTitle());
 			// alert.setMessage(message);
-
 			// Set an EditText view to get user input
 			final EditText input = new EditText(this);
-
 			input.setText(alarmPreference.getValue().toString());
-
 			alert.setView(input);
 			alert.setPositiveButton("Ok",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,
 								int whichButton) {
-
 							alarmPreference
 									.setValue(input.getText().toString());
-
 							if (alarmPreference.getKey() == Key.ALARM_NAME) {
 								alarm.setAlarmName(alarmPreference.getValue()
 										.toString());
 							}
-
 							alarmPreferenceListAdapter
 									.setMathAlarm(getMathAlarm());
 							alarmPreferenceListAdapter.notifyDataSetChanged();
@@ -248,17 +239,13 @@ public class AlarmPreferencesActivity extends ListActivity {
 			break;
 		case LIST:
 			alert = new AlertDialog.Builder(this);
-
 			alert.setTitle(alarmPreference.getTitle());
 			// alert.setMessage(message);
-
 			CharSequence[] items = new CharSequence[alarmPreference
 					.getOptions().length];
 			for (int i = 0; i < items.length; i++)
 				items[i] = alarmPreference.getOptions()[i];
-
 			alert.setItems(items, new OnClickListener() {
-
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					switch (alarmPreference.getKey()) {
@@ -333,10 +320,8 @@ public class AlarmPreferencesActivity extends ListActivity {
 			break;
 		case MULTIPLE_LIST:
 			alert = new AlertDialog.Builder(this);
-
 			alert.setTitle(alarmPreference.getTitle());
 			// alert.setMessage(message);
-
 			CharSequence[] multiListItems = new CharSequence[alarmPreference
 					.getOptions().length];
 			for (int i = 0; i < multiListItems.length; i++)

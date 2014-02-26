@@ -1,8 +1,8 @@
 package com.dungnh8.alarmclock.alert;
 
-
 import com.dungnh8.alarmclock.R;
 import com.dungnh8.alarmclock.database.Alarm;
+import com.dungnh8.alarmclock.util.Constants;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,20 +24,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class AlarmAlertActivity extends Activity implements OnClickListener {
-
 	private Alarm alarm;
 	private MediaPlayer mediaPlayer;
-
 	private StringBuilder answerBuilder = new StringBuilder();
-
 	private MathProblem mathProblem;
 	private Vibrator vibrator;
-
 	private boolean alarmActive;
-
 	private TextView problemView;
 	private TextView answerView;
 	private String answerString;
+	private static final String TAG = "AlarmAlertActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +43,10 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 				| WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 				| WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-
 		setContentView(R.layout.alarm_alert);
-
 		Bundle bundle = this.getIntent().getExtras();
-		alarm = (Alarm) bundle.getSerializable("alarm");
-
+		alarm = (Alarm) bundle.getSerializable(Constants.ALARM);
 		this.setTitle(alarm.getAlarmName());
-
 		switch (alarm.getDifficulty()) {
 		case EASY:
 			mathProblem = new MathProblem(3);
@@ -123,11 +115,8 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 
 		telephonyManager.listen(phoneStateListener,
 				PhoneStateListener.LISTEN_CALL_STATE);
-
 		// Toast.makeText(this, answerString, Toast.LENGTH_LONG).show();
-
 		startAlarm();
-
 	}
 
 	@Override
@@ -137,7 +126,6 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 	}
 
 	private void startAlarm() {
-
 		if (alarm.getAlarmTonePath() != "") {
 			mediaPlayer = new MediaPlayer();
 			if (alarm.getVibrate()) {
@@ -153,13 +141,12 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 				mediaPlayer.setLooping(true);
 				mediaPlayer.prepare();
 				mediaPlayer.start();
-
 			} catch (Exception e) {
 				mediaPlayer.release();
 				alarmActive = false;
+				Log.e(TAG, "startAlarm", e);
 			}
 		}
-
 	}
 
 	/*

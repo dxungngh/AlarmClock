@@ -53,8 +53,7 @@ public class AlarmPreferenceListAdapter extends BaseAdapter {
 						.getRingtoneUri(alarmsCursor.getPosition()).toString();
 			} while (alarmsCursor.moveToNext());
 		}
-		Log.d("AlarmPreferenceListAdapter", "Finished Loading "
-				+ alarmTones.length + " Ringtones.");
+		Log.d(TAG, "Finished Loading " + alarmTones.length + " Ringtones.");
 		alarmsCursor.close();
 		setMathAlarm(alarm);
 	}
@@ -177,7 +176,6 @@ public class AlarmPreferenceListAdapter extends BaseAdapter {
 							"Ringtone", getAlarmTones()[0], alarmTones, null,
 							Type.LIST));
 		}
-
 		preferences.add(new AlarmPreference(AlarmPreference.Key.ALARM_VIBRATE,
 				"Vibrate", null, null, alarm.getVibrate(), Type.BOOLEAN));
 	}
