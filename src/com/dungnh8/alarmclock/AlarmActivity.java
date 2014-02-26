@@ -148,7 +148,7 @@ public class AlarmActivity extends FragmentActivity implements
 					alarms = Database.getAll();
 					alarmListAdapter.notifyDataSetChanged();
 				} catch (Exception e) {
-					Log.e(TAG, "", e);
+					Log.e(TAG, "onChangedAlarms", e);
 				}
 			}
 		});

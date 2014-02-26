@@ -27,13 +27,6 @@
         android:layout_marginLeft="5dp"
         android:text="@string/no_alarms" />
 
-    <View
-        android:id="@+id/okCancel_border_top"
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/holo_blue_light" />
-
     <LinearLayout
         android:id="@+id/okCancel"
         android:layout_width="match_parent"
@@ -44,6 +37,10 @@
             android:id="@+id/textView_cancel"
             android:layout_width="0dp"
             android:layout_height="@dimen/alarm_preferences_button_height"
+            android:layout_marginBottom="@dimen/alarm_preferences_button_margin_vertical"
+            android:layout_marginLeft="@dimen/alarm_preferences_button_margin_horizon"
+            android:layout_marginRight="@dimen/alarm_preferences_button_margin_horizon"
+            android:layout_marginTop="@dimen/alarm_preferences_button_margin_vertical"
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:clickable="true"
@@ -56,6 +53,10 @@
             android:id="@+id/textView_OK"
             android:layout_width="0dp"
             android:layout_height="@dimen/alarm_preferences_button_height"
+            android:layout_marginBottom="@dimen/alarm_preferences_button_margin_vertical"
+            android:layout_marginLeft="@dimen/alarm_preferences_button_margin_horizon"
+            android:layout_marginRight="@dimen/alarm_preferences_button_margin_horizon"
+            android:layout_marginTop="@dimen/alarm_preferences_button_margin_vertical"
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:clickable="true"

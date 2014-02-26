@@ -31,6 +31,8 @@ public final class R {
         /**  alarm preferences 
          */
         public static final int alarm_preferences_button_height=0x7f050014;
+        public static final int alarm_preferences_button_margin_horizon=0x7f050015;
+        public static final int alarm_preferences_button_margin_vertical=0x7f050016;
         /**  alarm activity 
          */
         public static final int alarm_toolbar_height=0x7f050004;
@@ -84,21 +86,20 @@ public final class R {
         public static final int TableRow4=0x7f09000c;
         public static final int alarm_empty_warning=0x7f090017;
         public static final int alarm_list_of_alarm=0x7f090016;
-        public static final int button_delete=0x7f090029;
-        public static final int button_new=0x7f090028;
+        public static final int button_delete=0x7f090028;
+        public static final int button_new=0x7f090027;
         public static final int checkBox_alarm_active=0x7f09001a;
-        public static final int menu_item_contact_author=0x7f09002d;
-        public static final int menu_item_other_apps=0x7f09002c;
-        public static final int menu_item_rate=0x7f09002b;
-        public static final int okCancel=0x7f09001c;
-        public static final int okCancel_border_top=0x7f09001b;
-        public static final int popup_fragment_one_button_content=0x7f090020;
-        public static final int popup_fragment_one_button_title=0x7f09001f;
-        public static final int popup_fragment_one_button_yes_button=0x7f090021;
-        public static final int popup_fragment_two_button_content=0x7f090023;
-        public static final int popup_fragment_two_button_no_button=0x7f090025;
-        public static final int popup_fragment_two_button_title=0x7f090022;
-        public static final int popup_fragment_two_button_yes_button=0x7f090024;
+        public static final int menu_item_contact_author=0x7f09002c;
+        public static final int menu_item_other_apps=0x7f09002b;
+        public static final int menu_item_rate=0x7f09002a;
+        public static final int okCancel=0x7f09001b;
+        public static final int popup_fragment_one_button_content=0x7f09001f;
+        public static final int popup_fragment_one_button_title=0x7f09001e;
+        public static final int popup_fragment_one_button_yes_button=0x7f090020;
+        public static final int popup_fragment_two_button_content=0x7f090022;
+        public static final int popup_fragment_two_button_no_button=0x7f090024;
+        public static final int popup_fragment_two_button_title=0x7f090021;
+        public static final int popup_fragment_two_button_yes_button=0x7f090023;
         public static final int tableRow0=0x7f090000;
         public static final int tableRow1=0x7f090002;
         public static final int tableRow2=0x7f090004;
@@ -106,13 +107,13 @@ public final class R {
         public static final int tableRow6=0x7f090014;
         public static final int textView1=0x7f090001;
         public static final int textView2=0x7f090003;
-        public static final int textView_OK=0x7f09001e;
+        public static final int textView_OK=0x7f09001d;
         public static final int textView_alarm_days=0x7f090019;
         public static final int textView_alarm_time=0x7f090018;
-        public static final int textView_cancel=0x7f09001d;
-        public static final int textView_title_bar=0x7f090027;
-        public static final int title_border_bottom=0x7f09002a;
-        public static final int toolbar=0x7f090026;
+        public static final int textView_cancel=0x7f09001c;
+        public static final int textView_title_bar=0x7f090026;
+        public static final int title_border_bottom=0x7f090029;
+        public static final int toolbar=0x7f090025;
     }
     public static final class layout {
         public static final int alarm_alert=0x7f030000;

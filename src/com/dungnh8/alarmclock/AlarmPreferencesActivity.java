@@ -18,13 +18,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
@@ -34,12 +33,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.dungnh8.alarmclock.R;
 import com.dungnh8.alarmclock.adapter.AlarmPreferenceListAdapter;
 import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.AlarmPreference;
-import com.dungnh8.alarmclock.database.Database;
 import com.dungnh8.alarmclock.database.AlarmPreference.Key;
+import com.dungnh8.alarmclock.database.Database;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
@@ -127,35 +125,22 @@ public class AlarmPreferencesActivity extends ListActivity {
 	 * @author dungnh8
 	 */
 	private void setOkListener() {
-		okButton.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+		okButton.setOnClickListener(new View.OnClickListener() {
 
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					okButton.setBackgroundColor(getResources().getColor(
-							R.color.holo_blue_light));
-					break;
-				case MotionEvent.ACTION_UP:
-					v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-					Database.init(getApplicationContext());
-					if (getMathAlarm().getId() < 1) {
-						Database.create(getMathAlarm());
-					} else {
-						Database.update(getMathAlarm());
-					}
-					callMathAlarmScheduleService();
-					Toast.makeText(AlarmPreferencesActivity.this,
-							getMathAlarm().getTimeUntilNextAlarmMessage(),
-							Toast.LENGTH_LONG).show();
-					finish();
-				case MotionEvent.ACTION_MOVE:
-				case MotionEvent.ACTION_CANCEL:
-					okButton.setBackgroundColor(getResources().getColor(
-							android.R.color.transparent));
-					break;
+			@Override
+			public void onClick(View v) {
+				v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+				Database.init(getApplicationContext());
+				if (getMathAlarm().getId() < 1) {
+					Database.create(getMathAlarm());
+				} else {
+					Database.update(getMathAlarm());
 				}
-				return true;
+				callMathAlarmScheduleService();
+				Toast.makeText(AlarmPreferencesActivity.this,
+						getMathAlarm().getTimeUntilNextAlarmMessage(),
+						Toast.LENGTH_LONG).show();
+				finish();
 			}
 		});
 	}
@@ -166,25 +151,12 @@ public class AlarmPreferencesActivity extends ListActivity {
 	 * @author dungnh8
 	 */
 	private void setCancelListener() {
-		cancelButton.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
+		cancelButton.setOnClickListener(new View.OnClickListener() {
 
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					cancelButton.setBackgroundColor(getResources().getColor(
-							R.color.holo_blue_light));
-					break;
-				case MotionEvent.ACTION_UP:
-					v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-					finish();
-				case MotionEvent.ACTION_MOVE:
-				case MotionEvent.ACTION_CANCEL:
-					cancelButton.setBackgroundColor(getResources().getColor(
-							android.R.color.transparent));
-					break;
-				}
-				return true;
+			@Override
+			public void onClick(View v) {
+				v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+				finish();
 			}
 		});
 	}
@@ -447,15 +419,12 @@ public class AlarmPreferencesActivity extends ListActivity {
 			if (mediaPlayer != null)
 				mediaPlayer.release();
 		} catch (Exception e) {
+			Log.e(TAG, "onPause", e);
 		}
-
-		// setListAdapter(null);
-
 	}
 
 	@Override
 	protected void onResume() {
-
 		// Restore data in event of case of orientation change
 		@SuppressWarnings("deprecation")
 		final Object data = getLastNonConfigurationInstance();

@@ -3,11 +3,6 @@ package com.dungnh8.alarmclock.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dungnh8.alarmclock.database.Alarm;
-import com.dungnh8.alarmclock.database.AlarmPreference;
-import com.dungnh8.alarmclock.database.AlarmPreference.Key;
-import com.dungnh8.alarmclock.database.AlarmPreference.Type;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.media.Ringtone;
@@ -21,6 +16,10 @@ import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
+import com.dungnh8.alarmclock.database.Alarm;
+import com.dungnh8.alarmclock.database.AlarmPreference;
+import com.dungnh8.alarmclock.database.AlarmPreference.Type;
+
 public class AlarmPreferenceListAdapter extends BaseAdapter {
 
 	private Context context;
@@ -29,18 +28,13 @@ public class AlarmPreferenceListAdapter extends BaseAdapter {
 	private final String[] repeatDays = { "Sunday", "Monday", "Tuesday",
 			"Wednesday", "Thursday", "Friday", "Saturday" };
 	private final String[] alarmDifficulties = { "Easy", "Medium", "Hard" };
-
 	private String[] alarmTones;
 	private String[] alarmTonePaths;
+	private static final String TAG = "AlarmPreferenceListAdapter";
 
 	public AlarmPreferenceListAdapter(Context context, Alarm alarm) {
 		setContext(context);
-
-		// (new Runnable(){
-		//
-		// @Override
-		// public void run() {
-		Log.d("AlarmPreferenceListAdapter", "Loading Ringtones...");
+		Log.d(TAG, "Loading Ringtones...");
 
 		RingtoneManager ringtoneMgr = new RingtoneManager(getContext());
 
@@ -65,11 +59,6 @@ public class AlarmPreferenceListAdapter extends BaseAdapter {
 		Log.d("AlarmPreferenceListAdapter", "Finished Loading "
 				+ alarmTones.length + " Ringtones.");
 		alarmsCursor.close();
-		//
-		// }
-		//
-		// }).run();
-		//
 		setMathAlarm(alarm);
 	}
 
