@@ -16,12 +16,12 @@ import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
+import com.dungnh8.alarmclock.R;
 import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.AlarmPreference;
 import com.dungnh8.alarmclock.database.AlarmPreference.Type;
 
 public class AlarmPreferenceListAdapter extends BaseAdapter {
-
 	private Context context;
 	private Alarm alarm;
 	private List<AlarmPreference> preferences = new ArrayList<AlarmPreference>();
@@ -37,11 +37,8 @@ public class AlarmPreferenceListAdapter extends BaseAdapter {
 		Log.d(TAG, "Loading Ringtones...");
 
 		RingtoneManager ringtoneMgr = new RingtoneManager(getContext());
-
 		ringtoneMgr.setType(RingtoneManager.TYPE_ALARM);
-
 		Cursor alarmsCursor = ringtoneMgr.getCursor();
-
 		alarmTones = new String[alarmsCursor.getCount() + 1];
 		alarmTones[0] = "Silent";
 		alarmTonePaths = new String[alarmsCursor.getCount() + 1];
@@ -84,12 +81,11 @@ public class AlarmPreferenceListAdapter extends BaseAdapter {
 		switch (alarmPreference.getType()) {
 		case BOOLEAN:
 			if (null == convertView
-					|| convertView.getId() != android.R.layout.simple_list_item_checked)
+					|| convertView.getId() != R.layout.checked_textview_layout)
 				convertView = layoutInflater.inflate(
-						android.R.layout.simple_list_item_checked, null);
-
+						R.layout.checked_textview_layout, null);
 			CheckedTextView checkedTextView = (CheckedTextView) convertView
-					.findViewById(android.R.id.text1);
+					.findViewById(R.id.checked_text_view);
 			checkedTextView.setText(alarmPreference.getTitle());
 			checkedTextView.setChecked((Boolean) alarmPreference.getValue());
 			break;
@@ -100,17 +96,15 @@ public class AlarmPreferenceListAdapter extends BaseAdapter {
 		case TIME:
 		default:
 			if (null == convertView
-					|| convertView.getId() != android.R.layout.simple_list_item_2)
+					|| convertView.getId() != R.layout.two_line_list_item_layout)
 				convertView = layoutInflater.inflate(
-						android.R.layout.simple_list_item_2, null);
-
+						R.layout.two_line_list_item_layout, null);
+			// set text
 			TextView text1 = (TextView) convertView
-					.findViewById(android.R.id.text1);
-			text1.setTextSize(18);
+					.findViewById(R.id.two_line_list_item_text1);
 			text1.setText(alarmPreference.getTitle());
-
 			TextView text2 = (TextView) convertView
-					.findViewById(android.R.id.text2);
+					.findViewById(R.id.two_line_list_item_text2);
 			text2.setText(alarmPreference.getSummary());
 			break;
 		}

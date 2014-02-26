@@ -38,6 +38,7 @@ import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.AlarmPreference;
 import com.dungnh8.alarmclock.database.AlarmPreference.Key;
 import com.dungnh8.alarmclock.database.Database;
+import com.dungnh8.alarmclock.helper.DrawHelper;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
@@ -97,9 +98,9 @@ public class AlarmPreferencesActivity extends ListActivity {
 									int which) {
 								Database.init(getApplicationContext());
 								if (getMathAlarm().getId() < 1) {
-									// Alarm not saved
 								} else {
 									Database.deleteEntry(alarm);
+									DrawHelper.changeAlarms();
 									callMathAlarmScheduleService();
 								}
 								finish();

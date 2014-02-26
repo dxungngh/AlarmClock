@@ -103,7 +103,9 @@ public class AlarmActivity extends FragmentActivity implements
 			alarms = Database.getAll();
 			if (alarms == null || alarms.size() <= 0) {
 				emptyWarningTextView.setVisibility(View.VISIBLE);
+				mathAlarmListView.setVisibility(View.GONE);
 			} else {
+				mathAlarmListView.setVisibility(View.VISIBLE);
 				emptyWarningTextView.setVisibility(View.GONE);
 				alarmListAdapter = new AlarmListAdapter(this, alarms,
 						getSupportFragmentManager());
@@ -144,9 +146,7 @@ public class AlarmActivity extends FragmentActivity implements
 			@Override
 			public void run() {
 				try {
-					Database.init(AlarmActivity.this);
-					alarms = Database.getAll();
-					alarmListAdapter.notifyDataSetChanged();
+					onResume();
 				} catch (Exception e) {
 					Log.e(TAG, "onChangedAlarms", e);
 				}

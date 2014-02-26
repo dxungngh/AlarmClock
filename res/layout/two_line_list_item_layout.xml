@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/alarm_preferences_row_height"
+    android:mode="twoLine" >
+
+    <TextView
+        android:id="@+id/two_line_list_item_text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/alarm_preferences_row_margin_top"
+        android:paddingLeft="@dimen/alarm_preferences_row_padding_left"
+        android:paddingRight="@dimen/alarm_preferences_row_padding_right"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_level3" />
+
+    <TextView
+        android:id="@+id/two_line_list_item_text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/two_line_list_item_text1"
+        android:paddingLeft="@dimen/alarm_preferences_row_padding_left"
+        android:paddingRight="@dimen/alarm_preferences_row_padding_right"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/text_size_level2" />
+
+</RelativeLayout>
