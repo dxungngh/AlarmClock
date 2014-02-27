@@ -35,7 +35,11 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="delete_this_alarm">Delete this alarm ?</string>
+
     <!-- Toast -->
     <string name="could_not_launch_the_market">Could not launch the market</string>
+
+    <!-- Admob -->
+    <string name="admob_id">a1530ee2c996770</string>
 
 </resources>

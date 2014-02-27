@@ -12,6 +12,16 @@
         android:layout_height="wrap_content"
         layout="@layout/toolbar" />
 
+    <!-- admob -->
+
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@id/footer_admob"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/admob_id" />
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"

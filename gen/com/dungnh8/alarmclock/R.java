@@ -73,54 +73,58 @@ public final class R {
         public static final int rounded_button_press=0x7f020007;
     }
     public static final class id {
-        public static final int Button0=0x7f090012;
-        public static final int Button1=0x7f090005;
-        public static final int Button2=0x7f090006;
-        public static final int Button3=0x7f090007;
-        public static final int Button4=0x7f090009;
-        public static final int Button5=0x7f09000a;
-        public static final int Button6=0x7f09000b;
-        public static final int Button7=0x7f09000d;
-        public static final int Button8=0x7f09000e;
-        public static final int Button9=0x7f09000f;
-        public static final int Button_clear=0x7f090015;
-        public static final int Button_decimal=0x7f090011;
-        public static final int Button_minus=0x7f090013;
-        public static final int TableRow3=0x7f090008;
-        public static final int TableRow4=0x7f09000c;
-        public static final int alarm_empty_warning=0x7f090017;
-        public static final int alarm_list_of_alarm=0x7f090016;
-        public static final int button_delete=0x7f090029;
-        public static final int button_new=0x7f090028;
-        public static final int checkBox_alarm_active=0x7f09001a;
-        public static final int checked_text_view=0x7f09001e;
-        public static final int menu_item_contact_author=0x7f09002f;
-        public static final int menu_item_other_apps=0x7f09002e;
-        public static final int menu_item_rate=0x7f09002d;
-        public static final int okCancel=0x7f09001b;
-        public static final int popup_fragment_one_button_content=0x7f090020;
-        public static final int popup_fragment_one_button_title=0x7f09001f;
-        public static final int popup_fragment_one_button_yes_button=0x7f090021;
-        public static final int popup_fragment_two_button_content=0x7f090023;
-        public static final int popup_fragment_two_button_no_button=0x7f090025;
-        public static final int popup_fragment_two_button_title=0x7f090022;
-        public static final int popup_fragment_two_button_yes_button=0x7f090024;
+        public static final int Button0=0x7f090014;
+        public static final int Button1=0x7f090007;
+        public static final int Button2=0x7f090008;
+        public static final int Button3=0x7f090009;
+        public static final int Button4=0x7f09000b;
+        public static final int Button5=0x7f09000c;
+        public static final int Button6=0x7f09000d;
+        public static final int Button7=0x7f09000f;
+        public static final int Button8=0x7f090010;
+        public static final int Button9=0x7f090011;
+        public static final int Button_clear=0x7f090017;
+        public static final int Button_decimal=0x7f090013;
+        public static final int Button_minus=0x7f090015;
+        public static final int TableRow3=0x7f09000a;
+        public static final int TableRow4=0x7f09000e;
+        public static final int alarm_admob=0x7f090019;
+        public static final int alarm_empty_warning=0x7f09001b;
+        public static final int alarm_list_of_alarm=0x7f09001a;
+        public static final int alarm_toolbar=0x7f090018;
+        public static final int button_delete=0x7f09002d;
+        public static final int button_new=0x7f09002c;
+        public static final int checkBox_alarm_active=0x7f09001e;
+        public static final int checked_text_view=0x7f090022;
+        public static final int footer_admob=0x7f090003;
+        public static final int menu_item_contact_author=0x7f090033;
+        public static final int menu_item_other_apps=0x7f090032;
+        public static final int menu_item_rate=0x7f090031;
+        public static final int okCancel=0x7f09001f;
+        public static final int popup_fragment_one_button_content=0x7f090024;
+        public static final int popup_fragment_one_button_title=0x7f090023;
+        public static final int popup_fragment_one_button_yes_button=0x7f090025;
+        public static final int popup_fragment_two_button_content=0x7f090027;
+        public static final int popup_fragment_two_button_no_button=0x7f090029;
+        public static final int popup_fragment_two_button_title=0x7f090026;
+        public static final int popup_fragment_two_button_yes_button=0x7f090028;
         public static final int tableRow0=0x7f090000;
-        public static final int tableRow1=0x7f090002;
-        public static final int tableRow2=0x7f090004;
-        public static final int tableRow5=0x7f090010;
-        public static final int tableRow6=0x7f090014;
+        public static final int tableRow1=0x7f090004;
+        public static final int tableRow2=0x7f090006;
+        public static final int tableRow5=0x7f090012;
+        public static final int tableRow6=0x7f090016;
+        public static final int tableRowAdmob=0x7f090002;
         public static final int textView1=0x7f090001;
-        public static final int textView2=0x7f090003;
-        public static final int textView_OK=0x7f09001d;
-        public static final int textView_alarm_days=0x7f090019;
-        public static final int textView_alarm_time=0x7f090018;
-        public static final int textView_cancel=0x7f09001c;
-        public static final int textView_title_bar=0x7f090027;
-        public static final int title_border_bottom=0x7f09002a;
-        public static final int toolbar=0x7f090026;
-        public static final int two_line_list_item_text1=0x7f09002b;
-        public static final int two_line_list_item_text2=0x7f09002c;
+        public static final int textView2=0x7f090005;
+        public static final int textView_OK=0x7f090021;
+        public static final int textView_alarm_days=0x7f09001d;
+        public static final int textView_alarm_time=0x7f09001c;
+        public static final int textView_cancel=0x7f090020;
+        public static final int textView_title_bar=0x7f09002b;
+        public static final int title_border_bottom=0x7f09002e;
+        public static final int toolbar=0x7f09002a;
+        public static final int two_line_list_item_text1=0x7f09002f;
+        public static final int two_line_list_item_text2=0x7f090030;
     }
     public static final class layout {
         public static final int alarm_alert=0x7f030000;
@@ -150,6 +154,9 @@ public final class R {
         public static final int _7=0x7f060011;
         public static final int _8=0x7f060012;
         public static final int _9=0x7f060013;
+        /**  Admob 
+         */
+        public static final int admob_id=0x7f06001d;
         /**  Math Alarm Activity 
  Math Alarm Activity 
          */

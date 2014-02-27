@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -8,9 +8,22 @@
     <!-- Toolbar -->
 
     <include
+        android:id="@+id/alarm_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         layout="@layout/toolbar" />
+
+    <!-- admob -->
+
+    <com.google.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/alarm_admob"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/alarm_toolbar"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/admob_id" />
 
     <!-- List of alarm -->
 
@@ -18,6 +31,7 @@
         android:id="@+id/alarm_list_of_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/alarm_admob"
         android:longClickable="true" />
 
     <!-- Empty notification -->
@@ -26,7 +40,8 @@
         android:id="@+id/alarm_empty_warning"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/alarm_admob"
         android:gravity="center"
         android:text="@string/no_alarms" />
 
-</LinearLayout>
+</RelativeLayout>

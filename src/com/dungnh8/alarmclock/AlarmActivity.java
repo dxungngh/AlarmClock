@@ -20,11 +20,13 @@ import android.widget.TextView;
 import com.dungnh8.alarmclock.adapter.AlarmListAdapter;
 import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.Database;
+import com.dungnh8.alarmclock.helper.AdMobHelper;
 import com.dungnh8.alarmclock.helper.DrawHelper;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.helper.MathAlarmServiceHelper;
 import com.dungnh8.alarmclock.listener.OnChangedAlarmsListener;
+import com.google.ads.AdView;
 
 public class AlarmActivity extends FragmentActivity implements
 		OnChangedAlarmsListener {
@@ -33,6 +35,7 @@ public class AlarmActivity extends FragmentActivity implements
 	private ListView mathAlarmListView;
 	private TextView emptyWarningTextView;
 	private AlarmListAdapter alarmListAdapter;
+	private AdView adView;
 	private Handler mHandler;
 	private static final String TAG = "AlarmActivity";
 
@@ -45,9 +48,12 @@ public class AlarmActivity extends FragmentActivity implements
 		setComponentView();
 		setListener();
 		MathAlarmServiceHelper.callMathAlarmScheduleService(this);
+		// load admob view
+		AdMobHelper.loadAdView(adView);
 	}
 
 	private void setComponentView() {
+		adView = (AdView) findViewById(R.id.alarm_admob);
 		newButton = (ImageButton) findViewById(R.id.button_new);
 		deleteButton = (ImageButton) findViewById(R.id.button_delete);
 		mathAlarmListView = (ListView) findViewById(R.id.alarm_list_of_alarm);
@@ -80,9 +86,9 @@ public class AlarmActivity extends FragmentActivity implements
 
 	@Override
 	protected void onResume() {
-		super.onResume();
 		DrawHelper.addOnChangedAlarmsListener(this);
 		drawContent();
+		super.onResume();
 	}
 
 	@Override

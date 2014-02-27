@@ -1,8 +1,12 @@
-package com.dungnh8.alarmclock.alert;
+package com.dungnh8.alarmclock;
 
 import com.dungnh8.alarmclock.R;
+import com.dungnh8.alarmclock.alert.MathProblem;
+import com.dungnh8.alarmclock.alert.StaticWakeLock;
 import com.dungnh8.alarmclock.database.Alarm;
+import com.dungnh8.alarmclock.helper.AdMobHelper;
 import com.dungnh8.alarmclock.util.Constants;
+import com.google.ads.AdView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,6 +36,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 	private boolean alarmActive;
 	private TextView problemView;
 	private TextView answerView;
+	private AdView adView;
 	private String answerString;
 	private static final String TAG = "AlarmAlertActivity";
 
@@ -44,32 +49,34 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 				| WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 		setContentView(R.layout.alarm_alert);
-		Bundle bundle = this.getIntent().getExtras();
-		alarm = (Alarm) bundle.getSerializable(Constants.ALARM);
-		this.setTitle(alarm.getAlarmName());
-		switch (alarm.getDifficulty()) {
-		case EASY:
-			mathProblem = new MathProblem(3);
-			break;
-		case MEDIUM:
-			mathProblem = new MathProblem(4);
-			break;
-		case HARD:
-			mathProblem = new MathProblem(5);
-			break;
-		}
-
+		getDataFromBundle();
+		setComponentView();
+		setListener();
 		answerString = String.valueOf(mathProblem.getAnswer());
 		if (answerString.endsWith(".0")) {
 			answerString = answerString.substring(0, answerString.length() - 2);
 		}
+		// Toast.makeText(this, answerString, Toast.LENGTH_LONG).show();
+		startAlarm();
+		// load admob view
+		AdMobHelper.loadAdView(adView);
+	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		alarmActive = true;
+	}
+
+	private void setComponentView() {
 		problemView = (TextView) findViewById(R.id.textView1);
 		problemView.setText(mathProblem.toString());
-
 		answerView = (TextView) findViewById(R.id.textView2);
 		answerView.setText("= ?");
+	}
 
+	private void setListener() {
+		adView = (AdView) findViewById(R.id.footer_admob);
 		((Button) findViewById(R.id.Button0)).setOnClickListener(this);
 		((Button) findViewById(R.id.Button1)).setOnClickListener(this);
 		((Button) findViewById(R.id.Button2)).setOnClickListener(this);
@@ -83,10 +90,8 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 		((Button) findViewById(R.id.Button_clear)).setOnClickListener(this);
 		((Button) findViewById(R.id.Button_decimal)).setOnClickListener(this);
 		((Button) findViewById(R.id.Button_minus)).setOnClickListener(this);
-
 		TelephonyManager telephonyManager = (TelephonyManager) this
 				.getSystemService(Context.TELEPHONY_SERVICE);
-
 		PhoneStateListener phoneStateListener = new PhoneStateListener() {
 			@Override
 			public void onCallStateChanged(int state, String incomingNumber) {
@@ -115,14 +120,23 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 
 		telephonyManager.listen(phoneStateListener,
 				PhoneStateListener.LISTEN_CALL_STATE);
-		// Toast.makeText(this, answerString, Toast.LENGTH_LONG).show();
-		startAlarm();
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		alarmActive = true;
+	private void getDataFromBundle() {
+		Bundle bundle = this.getIntent().getExtras();
+		alarm = (Alarm) bundle.getSerializable(Constants.ALARM);
+		this.setTitle(alarm.getAlarmName());
+		switch (alarm.getDifficulty()) {
+		case EASY:
+			mathProblem = new MathProblem(2);
+			break;
+		case MEDIUM:
+			mathProblem = new MathProblem(3);
+			break;
+		case HARD:
+			mathProblem = new MathProblem(4);
+			break;
+		}
 	}
 
 	private void startAlarm() {
@@ -256,5 +270,4 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 		}
 		return correct;
 	}
-
 }

@@ -38,16 +38,19 @@ import com.dungnh8.alarmclock.database.Alarm;
 import com.dungnh8.alarmclock.database.AlarmPreference;
 import com.dungnh8.alarmclock.database.AlarmPreference.Key;
 import com.dungnh8.alarmclock.database.Database;
+import com.dungnh8.alarmclock.helper.AdMobHelper;
 import com.dungnh8.alarmclock.helper.DrawHelper;
 import com.dungnh8.alarmclock.helper.EmailHelper;
 import com.dungnh8.alarmclock.helper.MarketHelper;
 import com.dungnh8.alarmclock.service.AlarmServiceBroadcastReciever;
 import com.dungnh8.alarmclock.util.Constants;
+import com.google.ads.AdView;
 
 public class AlarmPreferencesActivity extends ListActivity {
 	private ImageButton deleteButton, newButton;
 	private TextView okButton;
 	private TextView cancelButton;
+	private AdView adView;
 	private Alarm alarm;
 	private MediaPlayer mediaPlayer;
 	private static final String TAG = "AlarmPreferencesActivity";
@@ -60,6 +63,8 @@ public class AlarmPreferencesActivity extends ListActivity {
 		setComponentView();
 		setListener();
 		getDataFromBundle();
+		// load admob view
+		AdMobHelper.loadAdView(adView);
 	}
 
 	private void getDataFromBundle() {
@@ -167,6 +172,7 @@ public class AlarmPreferencesActivity extends ListActivity {
 	 * @author dungnh8
 	 */
 	private void setComponentView() {
+		adView = (AdView) findViewById(R.id.footer_admob);
 		newButton = (ImageButton) findViewById(R.id.button_new);
 		deleteButton = (ImageButton) findViewById(R.id.button_delete);
 		okButton = (TextView) findViewById(R.id.textView_OK);
